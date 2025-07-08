@@ -1,9 +1,11 @@
+// src/views/ContactList.jsx
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useContacts } from "../context/ContactContext";
 import ContactCard from "../components/ContactCard";
 
-const Contact = () => {
+const ContactList = () => {
   const { contacts, deleteContact, setSelectedContact } = useContacts();
   const navigate = useNavigate();
 
@@ -12,7 +14,7 @@ const Contact = () => {
 
   const handleEdit = (contact) => {
     setSelectedContact(contact);
-    navigate("/contacts/add");
+    navigate(`/contacts/edit/${contact.id}`); 
   };
 
   const confirmDelete = (contact) => {
@@ -99,4 +101,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default ContactList;

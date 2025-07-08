@@ -1,15 +1,14 @@
-import rigoImageUrl from "../assets/img/rigo-baby.jpg";
-import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+// src/pages/Home.jsx
+
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
-  const { store, dispatch } = useGlobalReducer();
+  const navigate = useNavigate();
 
-  return (
-    <div className="text-center mt-5">
-      <h1>Hello Rigo!!</h1>
-      <p>
-        <img src={rigoImageUrl} alt="Rigo Baby" />
-      </p>
-    </div>
-  );
+  useEffect(() => {
+    navigate("/contacts");
+  }, []);
+
+  return null;
 };

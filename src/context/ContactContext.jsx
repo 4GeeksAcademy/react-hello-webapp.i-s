@@ -5,7 +5,7 @@ const ContactContext = createContext();
 const AGENDA_SLUG = "isabel";
 const API_BASE = "https://playground.4geeks.com/contact";
 const API_CONTACTS_LIST = `${API_BASE}/agendas/${AGENDA_SLUG}/contacts`;
-const API_CONTACTS = `${API_BASE}/contacts`;
+const API_CONTACTS = `${API_BASE}/agendas/${AGENDA_SLUG}/contacts`;
 
 export const ContactProvider = ({ children }) => {
   const [contacts, setContacts] = useState([]);
@@ -20,7 +20,6 @@ export const ContactProvider = ({ children }) => {
       const data = await res.json();
       console.log("🟢 Contacts fetched raw:", data);
 
-    
       if (Array.isArray(data)) {
         setContacts(data);
       } else if (data.contacts && Array.isArray(data.contacts)) {
@@ -28,7 +27,6 @@ export const ContactProvider = ({ children }) => {
       } else if (data.results && Array.isArray(data.results)) {
         setContacts(data.results);
       } else {
-
         setContacts([]);
         console.warn("⚠️ Estructura inesperada en datos de contactos");
       }
@@ -41,7 +39,7 @@ export const ContactProvider = ({ children }) => {
   const createContact = async (contact) => {
     console.log("🟡 Enviando contacto:", contact);
     try {
-      const res = await fetch(`https://playground.4geeks.com/contact/agendas/${AGENDA_SLUG}/contacts`, {
+      const res = await fetch(API_CONTACTS_LIST, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
